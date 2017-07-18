@@ -12,14 +12,14 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
       template is ui-view it's used to display nested views
     */
     $stateProvider.state('app', {
-            url: '',
-            abstract: true,
-            template: '<navbar /><div class="container"><ui-view></ui-view></div>'
-        })
+        url: '',
+        abstract: true,
+        template: '<navbar /><div class="container"><ui-view></ui-view></div>'
+    })
         .state('callback', {
             url: '/auth/callback/:token',
             template: '',
-            controller: ['UsersService', '$stateParams', '$state', function(UsersService, $stateParams, $state) {
+            controller: ['UsersService', '$stateParams', '$state', function (UsersService, $stateParams, $state) {
                 if ($stateParams.token) {
                     UsersService.setToken($stateParams.token).then((user) => {
                         let toastContent = `Welcome ${user.name} !`
@@ -31,4 +31,5 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
                 }
             }]
         })
+
 }]
