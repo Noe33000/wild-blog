@@ -12,14 +12,14 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
       template is ui-view it's used to display nested views
     */
     $stateProvider.state('app', {
-            url: '',
-            abstract: true,
-            template: '<navbar /><div class="container"><ui-view></ui-view></div>'
-        })
+        url: '',
+        abstract: true,
+        template: '<navbar /><div class="container"><ui-view></ui-view></div>'
+    })
         .state('callback', {
             url: '/auth/callback/:token',
             template: '',
-            controller: ['UsersService', '$stateParams', '$state', function(UsersService, $stateParams, $state) {
+            controller: ['UsersService', '$stateParams', '$state', function (UsersService, $stateParams, $state) {
                 if ($stateParams.token) {
                     UsersService.setToken($stateParams.token).then((user) => {
                         let toastContent = `Welcome ${user.name} !`
@@ -31,4 +31,28 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
                 }
             }]
         })
+        .state('algo1', {
+            url: '/algo1',
+            template: '',
+            controller: ['$scope', function ($scope) {
+                function returnMyFriends() {
+                    // Instancie le tableau de noms et on en récupère la taille
+                    const friends = ["Ryan", "Kieran", "Mark"],
+                        friendListLength = friends.length;
+                    // Instencie la variable que l'on va renvoyé à la fin du script
+                    let toReturn = [];
+                    // On boucle pour calculer le nombre de caractéres de chaques amis
+                    for (let i = 0; i < friendListLength; i++){
+                        // Si la taille vaut 4 on l'ajoute dans le tableau à renvoyer sinon on passe au prochain.
+                        if(friends[i].length === 4){
+                            toReturn.push(friends[i])
+                        }
+                    }                    
+                    return toReturn;
+                }
+                // Alert pour indiquer les amis dont le prénom fait 4 lettres
+                alert(returnMyFriends())
+            }]
+        })
+
 }]
