@@ -1,8 +1,9 @@
 <!-- Display blogItemMenu component (see blogItemMenu.js ) and bind properties with all functions  -->
-<blog-item-menu ng-if="$ctrl.editable" user="$ctrl.user" edit-mode="$ctrl.editMode" on-undo="$ctrl.undo()" on-edit="$ctrl.editMode = !$ctrl.editMode" on-delete="$ctrl.delete()" on-save="$ctrl.save()" />
+<blog-item-menu ng-if="$ctrl.editable" user="$ctrl.user" edit-mode="$ctrl.editMode" on-undo="$ctrl.undo()" on-edit="$ctrl.editMode = !$ctrl.editMode"
+    on-delete="$ctrl.delete()" on-save="$ctrl.save()" />
 <div class="col s12 m4">
     <div class="card">
-    
+
         <!-- In general if it's not editable it's when this component is used in the blogList component -->
         <div class="card-content">
             <!-- Display post.title if this component is not editable or editable and not in edit mode -->
@@ -15,6 +16,11 @@
             <div ng-if="(!$ctrl.editable || ($ctrl.editable && !$ctrl.editMode))">
                 {{$ctrl.post.content | limitTo: ($ctrl.editable ? $ctrl.post.content.length : 110)}}
             </div>
+            <br>
+            {{$ctrl.post}}
+            <small><em>{{$ctrl.post.publishedAt |  date: "yyyy-MM-dd"}}</em></small>
+            <!--Display date picker-->
+            <input type="date" class="datepicker" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.publishedAt" placeholder="Date as YYYY-MM-DD">
             <!-- Display textarea for editing post.content only if editable and in edit mode -->
             <textarea class="materialize-textarea" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.content" placeholder="Content"></textarea>
         </div>

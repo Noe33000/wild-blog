@@ -12,6 +12,7 @@ let blogItem = {
     controller: ['UsersService', 'PostsService', '$stateParams', '$state', function(UsersService, PostsService, $stateParams, $state) {
         'use  strict'
         let initialPost;
+        this.editMode = false;
 
         // Call getCurrent() method from UsersService.
         // When this request receive response we affect response data to this controller variable user
@@ -85,7 +86,9 @@ let blogItem = {
             return (this.user.bookmarks.find((post_id) => post_id.id === this.post._id))
         }
 
+            console.log(this.post)
         this.addOrRemoveToBookmark = () => {
+            console.log("second   " + this.post.publishedAt)            
             // Try to find post in bookmarks
             let postFound = this.user.bookmarks.find((post) => post.id === this.post._id)
 
